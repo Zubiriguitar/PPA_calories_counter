@@ -75,7 +75,7 @@ while True:
 
 with open('calories.csv', mode = 'w') as calories:
   data_writer = csv.writer(calories, delimiter = ',')
-  data_writer.writerow(['Date', 'Fruit', 'Fruit calories', 'Total calories'])
+  data_writer.writerow(['Date', 'Fruit', 'Quantity', 'Fruit calories', 'Total calories'])
   while True:
     if fruit_eating_question == 'Y' or 'Yes':
       print('Please, enter fruit name bellow:\n(example: Apple)')
@@ -92,21 +92,21 @@ with open('calories.csv', mode = 'w') as calories:
           fruit_counter = int(input())
           kcal_counter = fruit_counter * kcal_dict[key] / 100
           all_calories += kcal_counter
-          data_writer.writerow([current_date, key, kcal_counter, all_calories])
+          data_writer.writerow([current_date, key, fruit_counter, kcal_counter, all_calories])
         elif fruit_name == 'Grapefruit':
           fruit_name += 's'
           print('How many ', fruit_name,' did you eat today?')
           fruit_counter = int(input())
           kcal_counter = fruit_counter * kcal_dict[key] * 2
           all_calories += kcal_counter
-          data_writer.writerow([current_date, key, kcal_counter, all_calories])
+          data_writer.writerow([current_date, key, fruit_counter, kcal_counter, all_calories])
         else:
           fruit_name += 's'
           print('How many ', fruit_name,' did you eat today?')
           fruit_counter = int(input())
           kcal_counter = fruit_counter * kcal_dict[key]
           all_calories += kcal_counter
-          data_writer.writerow([current_date, key, kcal_counter, all_calories])
+          data_writer.writerow([current_date, key, fruit_counter, kcal_counter, all_calories])
     print('Would you like to add another fruit? \nY/N')
     fruit_eating_question = str(input())
     if fruit_eating_question == 'Y':

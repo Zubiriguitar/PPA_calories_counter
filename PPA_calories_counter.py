@@ -33,19 +33,23 @@ kcal_dict = {
   'Tangerine' : 20,
   }
 
-grammar_list = [
+other_list = [
   'Blackberries',
   'Blueberries', 
   'Cherries',
   'Cranberries',
   'Grapes',
   'Rasberries',
-  'Strawberries'
+  'Strawberries',
+  'Melon',
+  'Pinaple'
   ]
+
 fruit_name = None
 fruit_counter = None
 kcal_counter = None
 all_calories = 0
+list_check = []
 
 while True:
   print('Please, enter current date :', '\n(example: 25/10/20)')
@@ -72,22 +76,30 @@ while True:
 with open('calories.csv', mode = 'w') as calories:
   data_writer = csv.writer(calories, delimiter = ',')
   data_writer.writerow(['Date', 'Fruit', 'Fruit calories', 'Total calories'])
-  while fruit_eating_question == 'Y':
+  while True:
     if fruit_eating_question == 'Y' or 'Yes':
       print('Please, enter fruit name bellow:\n(example: Apple)')
     fruit_name = str(input())
     for key in kcal_dict:
-      if fruit_name != key:
-        print('There is no such fruit in the list or you have a mistake while writing!')
-        break
-      elif fruit_name == key:
-        if fruit_name in grammar_list:
+      list_check.append(key)
+    if fruit_name not in list_check:
+      print('There is no such fruit in the list or you have a mistake while writing!','\n Try one more time!')
+      fruit_name = str(input())
+    for key in kcal_dict:
+      if fruit_name == key:
+        if fruit_name in other_list:
           print('How many grams of', fruit_name,' did you eat today?')
           fruit_counter = int(input())
-          kcal_counter = fruit_counter * kcal_dict[key]
+          kcal_counter = fruit_counter * kcal_dict[key] / 100
           all_calories += kcal_counter
           data_writer.writerow([current_date, key, kcal_counter, all_calories])
-          pass
+        elif fruit_name == 'Grapefruit':
+          fruit_name += 's'
+          print('How many ', fruit_name,' did you eat today?')
+          fruit_counter = int(input())
+          kcal_counter = fruit_counter * kcal_dict[key] * 2
+          all_calories += kcal_counter
+          data_writer.writerow([current_date, key, kcal_counter, all_calories])
         else:
           fruit_name += 's'
           print('How many ', fruit_name,' did you eat today?')

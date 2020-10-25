@@ -83,7 +83,8 @@ with open('calories.csv', mode = 'w') as calories:
     for key in kcal_dict:
       list_check.append(key)
     if fruit_name not in list_check:
-      print('There is no such fruit in the list or you have a mistake while writing!','\n Try one more time!')
+      print('There is no such fruit in the list or you have a mistake while writing!',
+            '\n Try one more time!')
       fruit_name = str(input())
     for key in kcal_dict:
       if fruit_name == key:
